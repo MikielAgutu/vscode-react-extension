@@ -9,9 +9,7 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:extension.helloWorld"
-  ],
+  "activationEvents": ["onCommand:extension.helloWorld"],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -19,15 +17,7 @@
         "command": "extension.helloWorld",
         "title": "Hello World"
       }
-    ],
-    "menus": {
-      "explorer/context": [
-        {
-          "command": "extension.helloWorld",
-          "group": "1_modification "
-        }
-      ]
-    }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
