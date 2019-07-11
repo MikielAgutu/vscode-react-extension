@@ -1,9 +1,12 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html",
-  filename: "./index.html"
+  filename: "./index.html",
+  inlineSource: '.(js|css)$'
 });
+const htmlWebpackInlineSourcePlugin = new HtmlWebpackInlineSourcePlugin();
 
 module.exports = {
   module: {
@@ -28,5 +31,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [htmlWebpackPlugin]
+  plugins: [htmlWebpackPlugin, htmlWebpackInlineSourcePlugin]
 };

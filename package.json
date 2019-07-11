@@ -22,7 +22,7 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./ && copy react-app\\dist\\index.html out\\index.html && copy react-app\\dist\\main.js out\\main.js",
+    "compile": "tsc -p ./ && copy react-app\\dist\\index.html out\\index.html",
     "pretest": "npm run compile",
     "test": "node ./out/test/runTest.js"
   },
