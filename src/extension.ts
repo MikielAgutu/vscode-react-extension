@@ -5,8 +5,6 @@ import * as path from 'path';
 const startCommandName = 'extension.startExtension';
 const webViewPanelTitle = 'Custom extension';
 const webViewPanelId = 'customExtension';
-const extensionName = "testextension";
-const publisherName = "redgate";
 
 function startCommandHandler(context: vscode.ExtensionContext) : void {
   const showOptions = {
@@ -20,11 +18,24 @@ function startCommandHandler(context: vscode.ExtensionContext) : void {
   );
 
   panel.webview.html = getHtmlForWebview();
-  panel.onDidDispose(onPanelDispose, null, context.subscriptions)
+  panel.webview.onDidReceiveMessage(
+    onPanelDidReceiveMessage,
+    undefined,
+    context.subscriptions
+  );
+  panel.onDidDispose(onPanelDispose, null, context.subscriptions);
 }
 
 function onPanelDispose() : void {
   // Clean up panel here
+}
+
+function onPanelDidReceiveMessage(message : any) {
+  switch (message.command) {
+    case 'showInformationMessage':
+      vscode.window.showInformationMessage(message.text);
+      return;
+  }
 }
 
 function getHtmlForWebview() : string {
