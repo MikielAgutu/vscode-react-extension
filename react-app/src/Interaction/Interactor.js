@@ -1,5 +1,5 @@
-const InteractionInterface = {
+const Interactor = {
   showInformationMessage: text => console.log(`showInformationMessage ${text}`) 
 }
 
-export default InteractionInterface;
+export default Interactor;
