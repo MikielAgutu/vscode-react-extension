@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 
 const startCommandName = 'extension.helloWorld';
 
-function startCommandHandler() : void {
+function startCommandHandler(context: vscode.ExtensionContext) : void {
   const showOptions = {};
   const panel = vscode.window.createWebviewPanel(
     'helloWorld',
@@ -12,6 +12,11 @@ function startCommandHandler() : void {
   );
 
   panel.webview.html = getHtmlForWebview();
+  panel.onDidDispose(onPanelDispose, null, context.subscriptions)
+}
+
+function onPanelDispose() {
+  // Clean up panel here
 }
 
 function getHtmlForWebview() : string {
@@ -30,7 +35,7 @@ function getHtmlForWebview() : string {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-  const startCommand = vscode.commands.registerCommand(startCommandName, startCommandHandler);
+  const startCommand = vscode.commands.registerCommand(startCommandName, () => startCommandHandler(context));
 
   context.subscriptions.push(startCommand);
 }
