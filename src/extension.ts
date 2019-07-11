@@ -1,15 +1,36 @@
 import * as vscode from 'vscode';
 
-export function activate(context: vscode.ExtensionContext) {
+const startCommandName = 'extension.helloWorld';
 
-  console.log('Congratulations, your extension "testextension" is now active!');
+function startCommandHandler() : void {
+  const showOptions = {};
+  const panel = vscode.window.createWebviewPanel(
+    'helloWorld',
+    'Hello World',
+    vscode.ViewColumn.One,
+    showOptions
+  );
 
-
-  let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-    vscode.window.showInformationMessage('Hello World!');
-  });
-
-  context.subscriptions.push(disposable);
+  panel.webview.html = getHtmlForWebview();
 }
 
-export function deactivate() { }
+function getHtmlForWebview() : string {
+  return `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Cat Coding</title>
+  </head>
+  <body>
+      <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
+  </body>
+  </html>`;
+}
+
+export function activate(context: vscode.ExtensionContext) {
+  const startCommand = vscode.commands.registerCommand(startCommandName, startCommandHandler);
+
+  context.subscriptions.push(startCommand);
+}
