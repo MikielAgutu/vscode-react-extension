@@ -10,7 +10,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": ["onCommand:extension.startExtension"],
+  "activationEvents": [
+    "onCommand:extension.startExtension"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
