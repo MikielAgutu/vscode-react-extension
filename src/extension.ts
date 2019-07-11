@@ -29,7 +29,7 @@ function onPanelDispose() : void {
 
 function getHtmlForWebview() : string {
   try {
-    const reactApplicationHtmlFilename = 'extension.html';
+    const reactApplicationHtmlFilename = 'index.html';
     const htmlPath = path.join(__dirname , reactApplicationHtmlFilename);
     const html = fs.readFileSync(htmlPath).toString();
 
