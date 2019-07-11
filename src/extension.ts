@@ -1,8 +1,10 @@
 import * as vscode from 'vscode';
+import * as fs from 'fs';
+import * as path from 'path';
 
 const startCommandName = 'extension.startExtension';
-const webViewPanelTitle = "Custom extension";
-const webViewPanelId = "customExtension";
+const webViewPanelTitle = 'Custom extension';
+const webViewPanelId = 'customExtension';
 
 function startCommandHandler(context: vscode.ExtensionContext) : void {
   const showOptions = {
@@ -19,58 +21,27 @@ function startCommandHandler(context: vscode.ExtensionContext) : void {
   panel.onDidDispose(onPanelDispose, null, context.subscriptions)
 }
 
-function onPanelDispose() {
+function onPanelDispose() : void {
   // Clean up panel here
 }
 
+function getExtensionPath() : string {
+  const extension = vscode.extensions.getExtension(webViewPanelId);
+
+  if (extension) {
+    return extension.extensionPath;
+  }
+
+  throw 'Could not find extension path';
+}
+
 function getHtmlForWebview() : string {
-  return `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Cat Coding</title>
-  </head>
-  <body>
-      <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
-      <br />
-      <strong>React application running in VsCode:</strong><br />
-      <div id="react-app-container"></div>
+  const extensionPath = getExtensionPath();
+  const extensionHtmlFilePath = './extension.html';
+  const htmlPath = path.join(extensionPath, extensionHtmlFilePath);
+  const html = fs.readFileSync(htmlPath).toString();
 
-      <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-      <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-    
-      <!-- Load our React component. -->
-      <script>
-        'use strict';
-
-        const e = React.createElement;
-
-        class LikeButton extends React.Component {
-          constructor(props) {
-            super(props);
-            this.state = { liked: false };
-          }
-
-          render() {
-            if (this.state.liked) {
-              return 'You liked this.';
-            }
-
-            return e(
-              'button',
-              { onClick: () => this.setState({ liked: true }) },
-              'Like'
-            );
-          }
-        }
-
-        const domContainer = document.querySelector('#react-app-container');
-        ReactDOM.render(e(LikeButton), domContainer);
-      </script>
-    </body>
-  </html>`;
+  return html;
 }
 
 export function activate(context: vscode.ExtensionContext) {
