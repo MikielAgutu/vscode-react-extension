@@ -9,12 +9,12 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": ["onCommand:extension.helloWorld"],
+  "activationEvents": ["onCommand:extension.startExtension"],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "extension.helloWorld",
+        "command": "extension.startExtension",
         "title": "Hello World"
       }
     ]

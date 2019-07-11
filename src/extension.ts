@@ -1,12 +1,14 @@
 import * as vscode from 'vscode';
 
-const startCommandName = 'extension.helloWorld';
+const startCommandName = 'extension.startExtension';
+const webViewPanelTitle = "Custom extension";
+const webViewPanelId = "customExtension";
 
 function startCommandHandler(context: vscode.ExtensionContext) : void {
   const showOptions = {};
   const panel = vscode.window.createWebviewPanel(
-    'helloWorld',
-    'Hello World',
+    webViewPanelId,
+    webViewPanelTitle,
     vscode.ViewColumn.One,
     showOptions
   );
