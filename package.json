@@ -22,8 +22,7 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "compile": "tsc -p ./ && copy src\\extension.html out\\extension.html",
     "pretest": "npm run compile",
     "test": "node ./out/test/runTest.js"
   },

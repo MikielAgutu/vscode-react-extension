@@ -27,22 +27,10 @@ function onPanelDispose() : void {
   // Clean up panel here
 }
 
-function getExtensionPath() : string {
-  const extensionNameWithPublisher = `${publisherName}.${extensionName}`;
-  const extension = vscode.extensions.getExtension(extensionNameWithPublisher);
-
-  if (extension) {
-    return extension.extensionPath;
-  }
-
-  throw 'Could not find extension';
-}
-
 function getHtmlForWebview() : string {
   try {
-    const extensionPath = getExtensionPath();
-    const extensionHtmlFilePath = './extension.html';
-    const htmlPath = path.join(extensionPath, extensionHtmlFilePath);
+    const reactApplicationHtmlFilename = 'extension.html';
+    const htmlPath = path.join(__dirname , reactApplicationHtmlFilename);
     const html = fs.readFileSync(htmlPath).toString();
 
     return html;
