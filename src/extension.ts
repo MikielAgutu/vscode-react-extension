@@ -5,6 +5,8 @@ import * as path from 'path';
 const startCommandName = 'extension.startExtension';
 const webViewPanelTitle = 'Custom extension';
 const webViewPanelId = 'customExtension';
+const extensionName = "testextension";
+const publisherName = "redgate";
 
 function startCommandHandler(context: vscode.ExtensionContext) : void {
   const showOptions = {
@@ -26,7 +28,8 @@ function onPanelDispose() : void {
 }
 
 function getExtensionPath() : string {
-  const extension = vscode.extensions.getExtension(webViewPanelId);
+  const extensionNameWithPublisher = `${publisherName}.${extensionName}`;
+  const extension = vscode.extensions.getExtension(extensionNameWithPublisher);
 
   if (extension) {
     return extension.extensionPath;
