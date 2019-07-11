@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
-import InteractionApi from './interactionApi';
+import InteractionApi from './Interaction/InteractionApi';
 
 const Index = () => {
   return <>
