@@ -32,16 +32,21 @@ function getExtensionPath() : string {
     return extension.extensionPath;
   }
 
-  throw 'Could not find extension path';
+  throw 'Could not find extension';
 }
 
 function getHtmlForWebview() : string {
-  const extensionPath = getExtensionPath();
-  const extensionHtmlFilePath = './extension.html';
-  const htmlPath = path.join(extensionPath, extensionHtmlFilePath);
-  const html = fs.readFileSync(htmlPath).toString();
+  try {
+    const extensionPath = getExtensionPath();
+    const extensionHtmlFilePath = './extension.html';
+    const htmlPath = path.join(extensionPath, extensionHtmlFilePath);
+    const html = fs.readFileSync(htmlPath).toString();
 
-  return html;
+    return html;
+  }
+  catch (e) {
+    return `Error getting HTML for web view: ${e}`;
+  }
 }
 
 export function activate(context: vscode.ExtensionContext) {
