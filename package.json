@@ -1,6 +1,6 @@
 {
-  "name": "testextension",
-  "displayName": "TestExtension",
+  "name": "vscode-react-extension-sample",
+  "displayName": "VsCode React extension sample",
   "publisher": "redgate",
   "description": "",
   "version": "0.0.1",
@@ -18,7 +18,7 @@
     "commands": [
       {
         "command": "extension.startExtension",
-        "title": "Hello World"
+        "title": "VsCode React extension"
       }
     ]
   },

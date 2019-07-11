@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const startCommandName = 'extension.startExtension';
-const webViewPanelTitle = 'Custom extension';
-const webViewPanelId = 'customExtension';
+const webViewPanelTitle = 'React extension';
+const webViewPanelId = 'reactExtension';
 
 function startCommandHandler(context: vscode.ExtensionContext) : void {
   const showOptions = {
