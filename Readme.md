@@ -1,6 +1,6 @@
 # VSCode React extension sample
 
-Sample of how to create a VsCode extension using React.
+Sample of a VsCode extension using React.
 
 This uses the WebView API for VsCode to create a visual extension using plain React for the front end.
 
@@ -11,6 +11,9 @@ The React application is designed to be decoupled from VsCode, so it can be debu
 ### Debug in VsCode
 
 - Open the project in VsCode
+- `npm install`
+- Navigate to `/react-app`
+- `npm install`
 - Press `f5`
 
 ### Debug React UI by itself
