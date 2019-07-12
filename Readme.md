@@ -6,6 +6,8 @@ This uses the WebView API for VsCode to create a visual extension using plain Re
 
 The React application is designed to be decoupled from VsCode, so it can be debugged and developed using a normal browser. You should also be able to use all the usual npm packages (React Router, Redux, etc) as you would normally.
 
+![What it looks like](./example.png)
+
 ## How to use
 
 ### Debug in VsCode
