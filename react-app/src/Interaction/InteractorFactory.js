@@ -17,7 +17,7 @@ function create() {
     return BrowserInteractor;
   }
   else {
-    return VsCodeInteractorFactory.createFromVsCode(vsCodeApi);
+    return VsCodeInteractorFactory.createFromVsCodeApi(vsCodeApi);
   }
 }
 
