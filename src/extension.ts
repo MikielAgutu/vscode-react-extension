@@ -6,10 +6,13 @@ const startCommandName = 'extension.startExtension';
 const webViewPanelTitle = 'React extension';
 const webViewPanelId = 'reactExtension';
 
-function startCommandHandler(context: vscode.ExtensionContext) : void {
+let webViewPanel : vscode.WebviewPanel;
+
+function startCommandHandler(context: vscode.ExtensionContext): void {
   const showOptions = {
     enableScripts: true
   };
+
   const panel = vscode.window.createWebviewPanel(
     webViewPanelId,
     webViewPanelTitle,
@@ -23,25 +26,47 @@ function startCommandHandler(context: vscode.ExtensionContext) : void {
     undefined,
     context.subscriptions
   );
+
   panel.onDidDispose(onPanelDispose, null, context.subscriptions);
+
+  webViewPanel = panel;
 }
 
-function onPanelDispose() : void {
+function onPanelDispose(): void {
   // Clean up panel here
 }
 
-function onPanelDidReceiveMessage(message : any) {
+function onPanelDidReceiveMessage(message: any) {
   switch (message.command) {
     case 'showInformationMessage':
       vscode.window.showInformationMessage(message.text);
       return;
+
+    case 'getDirectoryInfo':
+      runDirCommand((result : string) => webViewPanel.webview.postMessage({ command: 'getDirectoryInfo', directoryInfo: result }));
+      return;
   }
 }
 
-function getHtmlForWebview() : string {
+function runDirCommand(callback : Function) {
+  var spawn = require('child_process').spawn;
+  var cp = spawn(process.env.comspec, ['/c', 'dir']);
+  
+  cp.stdout.on("data", function(data : any) {
+    const dataString = data.toString();
+
+    callback(dataString);
+  });
+  
+  cp.stderr.on("data", function(data : any) {
+    // No op
+  });
+}
+
+function getHtmlForWebview(): string {
   try {
     const reactApplicationHtmlFilename = 'index.html';
-    const htmlPath = path.join(__dirname , reactApplicationHtmlFilename);
+    const htmlPath = path.join(__dirname, reactApplicationHtmlFilename);
     const html = fs.readFileSync(htmlPath).toString();
 
     return html;
