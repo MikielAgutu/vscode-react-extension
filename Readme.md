@@ -15,6 +15,8 @@ The React application is designed to be decoupled from VsCode, so it can be debu
 - Navigate to `/react-app`
 - `npm install`
 - Press `f5`
+- Open the command selector (`ctrl+shift+p`)
+- Search for the extension (`VsCode React extension`) and press enter
 
 ### Debug React UI by itself
 
