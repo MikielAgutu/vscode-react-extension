@@ -14,6 +14,10 @@ You should be able to install npm packages (Redux, etc) as you would normally. H
 
 [Mini.css](https://minicss.org/) is used for the styling, accessed via a CDN.
 
+## Contributing
+
+Feel free to fork this for your own projects. Improvements to the repo are also welcome.
+
 ## How to use
 
 ### Debug in VsCode
